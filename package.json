@@ -1,0 +1,24 @@
+{
+  "name": "gulp-source-link-update",
+  "version": "1.0.0",
+  "description": "update source link timestamp(like css link, js link)",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangchaoyi/gulp-source-link-update.git"
+  },
+  "keywords": [
+    "source",
+    "update",
+    "link"
+  ],
+  "author": "wangchaoyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wangchaoyi/gulp-source-link-update/issues"
+  },
+  "homepage": "https://github.com/wangchaoyi/gulp-source-link-update#readme"
+}
