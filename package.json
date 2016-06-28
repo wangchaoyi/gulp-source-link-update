@@ -1,6 +1,6 @@
 {
   "name": "gulp-source-link-update",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "update source link timestamp(like css link, js link)",
   "main": "index.js",
   "scripts": {
