@@ -7,9 +7,6 @@ var gutil = require('gulp-util');
 var through = require('through2');
 var jsdom = require("jsdom");
 
-
-
-
 module.exports = function (options) {
 
 
@@ -44,11 +41,15 @@ module.exports = function (options) {
                 $("script[class='jsdom']").remove();
                 $("script").each(function () {
                     console.log(this.outerHTML);
-                    this.src = `${this.src}?v=${Date.now()}`;
+                    if(this.src){
+                        this.src = this.src + "?v=" + Date.now();
+                    }
                 });
 
                 $("link").each(function () {
-                    this.href = `${this.href}?v=${Date.now()}`;
+                    if(this.href){
+                        this.href = this.href + "?v=" + Date.now();
+                    }
                 });
 
                 content = "<!doctype html>\r"+content.outerHTML;
