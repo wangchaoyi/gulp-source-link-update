@@ -6,6 +6,58 @@
 var gutil = require('gulp-util');
 var through = require('through2');
 var jsdom = require("jsdom");
+var path = require("path");
+var fs = require("fs");
+var concat = require("gulp-concat");
+
+
+function isStyleTag(s){
+    return /<link\s+[^]*?\/>/.test(s);
+}
+function isScriptTag(s){
+    return /<script\s+[^]*?<\/script>/.test(s);
+}
+
+function getStyleSrc(s){
+    var links = [];
+    var r = /<link[^]*?href=(["'])([^]*?)(\1)[^]*?\/>/g;
+    var result;
+    
+    while((result = r.exec(s)) !== null){
+        links.push(result[2]);
+    }
+    
+    return links; 
+}
+
+function getScriptSrc(s){
+    var links = [];
+    var r = /<script[^]*?src=(["'])([^]*?)(\1)[^]*?<\/script>/g;
+    var result;
+    
+    while((result = r.exec(s)) !== null){
+        links.push(result[2]);
+    }
+    
+    return links;    
+}
+
+/**
+ * 解析html文件
+ */ 
+function parse(htmlContent){
+    // 判断作用域
+    //  /<!--\s*?(build)\s*start\((.*)\)([^]*?)<!--\s*?build\s*?end\s*?-->/g
+    
+    // 读取自定义变量
+    // /(\w+)=([\w.\-_]+)/g
+    
+    
+    
+}
+
+
+
 
 module.exports = function (options) {
 
@@ -30,40 +82,22 @@ module.exports = function (options) {
         // 然后将处理后的字符串，再转成Buffer形式
         var content = file.contents.toString();
 
-        jsdom.env(
-            content,
-            ["http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"],
-            function (err, window) {
-                var $ = window.$;
+        
+        
+        
+        // 下面这两句基本是标配啦，可以参考下 through2 的API
+        _this.push(file);
 
-                content = window.$("html")[0];
+        cb();
 
-                $("script[class='jsdom']").remove();
-                $("script").each(function () {
-                    console.log(this.outerHTML);
-                    if(this.src){
-                        this.src = this.src + "?v=" + Date.now();
-                    }
-                });
-
-                $("link").each(function () {
-                    if(this.href){
-                        this.href = this.href + "?v=" + Date.now();
-                    }
-                });
-
-                content = "<!doctype html>\r"+content.outerHTML;
-
-                file.contents = new Buffer(content);
-
-                // 下面这两句基本是标配啦，可以参考下 through2 的API
-                _this.push(file);
-
-                cb();
-
-            }
-        );
 
 
     });
 };
+
+exports = module.exports;
+
+exports.isStyleTag = isStyleTag;
+exports.isScriptTag = isScriptTag;
+exports.getScriptSrc = getScriptSrc;
+exports.getStyleSrc = getStyleSrc;

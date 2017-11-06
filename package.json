@@ -1,10 +1,10 @@
 {
   "name": "gulp-source-link-update",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "update source link timestamp(like css link, js link)",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "./node_modules/.bin/mocha tests/test.js"
   },
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-source-link-update": "^1.0.1",
     "gulp-util": "^3.0.7",
     "jsdom": "^9.3.0",
@@ -27,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/wangchaoyi/gulp-source-link-update/issues"
   },
-  "homepage": "https://github.com/wangchaoyi/gulp-source-link-update#readme"
+  "homepage": "https://github.com/wangchaoyi/gulp-source-link-update#readme",
+  "devDependencies": {
+    "gulp-util": "^3.0.8",
+    "mocha": "^4.0.1"
+  }
 }
